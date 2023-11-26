@@ -19,10 +19,7 @@ from taiyaki.cmdargs import (AutoBool, FileExists, NonNegative,
 def modification_base(read,can_model, mod_model,alphabet_info,canonical="ACGT",
                         idx = [0,1,1,2,3],length = 100,scale=1,
                         right_len = 0, canonical_base = "C", mod_base = "m"):
-    # print(canonical)
     m_position = np.where(np.array(list(canonical))[idx][read.get_reference()]==canonical_base)[0]
-    # m_position = np.where(np.array(list(canonical))[read.get_reference()]==mod_base)[0]
-    # print(m_position)
     signals = []
     seqs = []
     seq_len = []
