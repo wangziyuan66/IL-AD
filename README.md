@@ -16,7 +16,7 @@ taiyaki: https://github.com/nanoporetech/taiyaki/tree/master/taiyaki
 
 **Accuracy on RNA  synthesized oligo (canonical, fully modified 5mC, 6mA, 1mA)**
 
-![curlcake](image/rna.jpeg)
+![curlcake](images/rna.jpeg)
 
 ## Data Code
 
