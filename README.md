@@ -4,8 +4,9 @@ We leverage machine learning approaches to adapt nanopore sequencing basecallers
 
 ## Pre-request
 
-samtools
-taiyaki
+samtools: https://github.com/samtools/samtools
+
+taiyaki: https://github.com/nanoporetech/taiyaki/tree/master/taiyaki
 
 ## Installation
 
