@@ -14,6 +14,10 @@ taiyaki: https://github.com/nanoporetech/taiyaki/tree/master/taiyaki
 
 ## Example
 
+**Accuracy on RNA  synthesized oligo (canonical, fully modified 5mC, 6mA, 1mA)**
+
+![curlcake](image/rna.jpeg)
+
 ## Data Code
 
 The yeast native tRNA nanopore sequencing data was downloaded from European National Archive (ENA) under accession number PRJEB55684. Corresponding reference genome and modification annotation were downloaded from https://github.com/novoalab/Nano-tRNAseq/tree/main/ref. 
