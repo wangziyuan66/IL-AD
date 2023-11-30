@@ -14,9 +14,13 @@ taiyaki: https://github.com/nanoporetech/taiyaki/tree/master/taiyaki
 
 ## Example
 
-**Accuracy on RNA  synthesized oligo (canonical, fully modified 5mC, 6mA, 1mA)**
-
 ![curlcake](images/rna.jpeg)
+
+<center>**Accuracy on RNA  synthesized oligo (canonical, fully modified 5mC, 6mA, 1mA)**</center>
+
+![curlcake](images/trna.jpeg)
+
+<center>**Incremental learning benefit the reads mappability of tRNA**</center>
 
 ## Data Code
 
