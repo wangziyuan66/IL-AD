@@ -34,7 +34,7 @@ guppy_basecaller --input_path /path/to/input_reads --save_path /path/to/save_dir
 
 ### Anomaly Detection Training
 
-```py
+```sh
 python context_abnormal.py --device cuda:0 model_template.py initial_checkpoint.checkpoint \
 input.hdf5 --outdir path/to/output --save_every save_every --niteration niteration  --sig_win_len n --min_sub_batch_size BATCHSIZE --right_len m --can BASE
 ```
@@ -42,6 +42,12 @@ input.hdf5 --outdir path/to/output --save_every save_every --niteration niterati
 **sig_win_len** and **right_len** are $n$ and $m$ we mentioned in the manuscript.
 
 ### Modification Inference
+
+```sh
+python modification_inference.py mapped_reads.hdf5 can.checkpoint mod.checkpoint CANBASE MODBASE path/to/output/fasta --can_base_idx can_base_idx --type rna/dna --length n --right_len m
+```
+
+can_base_idx means the mapping from alphabet labels in the hdf5 files to canonical labels(**default** 0123 ATGC). For example, for a hdf5 whose labels are ACm(5mC)h(5hmC)GT, the can_base_idx should be 01123.
 
 ### RNA splicing
 
