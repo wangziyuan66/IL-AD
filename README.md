@@ -10,6 +10,42 @@ taiyaki: https://github.com/nanoporetech/taiyaki/tree/master/taiyaki
 
 ## Installation
 
+### Incremental Learning
+
+Training Process
+```sh
+python train.py model_template.py pretained_model.checkpoint input.hdf5 --device cuda:0 --outdir path/to/output \
+--save_every epochs --niteration niterations --lr_max lr_max --lambda lambda --min_sub_batch_size batchsize
+```
+
+Basecall: 
+
+You should then be able to export your checkpoint to json (using bin/dump_json.py in [taiyaki](https://github.com/nanoporetech/taiyaki/tree/master)) that can be used to basecall with Guppy.
+
+See Guppy documentation for more information on how to do this.
+
+Key options include selecting the Guppy config file to be appropriate for your application, and passing the complete path of your .json file.
+
+For example:
+
+```sh
+guppy_basecaller --input_path /path/to/input_reads --save_path /path/to/save_dir --config dna_r9.4.1_450bps_flipflop.cfg --model path/to/model.json --device cuda:1
+```
+
+### Anomaly Detection Training
+
+```py
+python train.py model_template.py pretained_model.checkpoint input.hdf5 --device cuda:0 --outdir path/to/output \
+--save_every epochs --niteration niterations --lr_max lr_max --lambda lambda --min_sub_batch_size batchsize
+```
+
+### Modification Inference
+
+### RNA splicing
+
+### tRNA specific processing
+
+
 ## Usage
 
 ## Example
