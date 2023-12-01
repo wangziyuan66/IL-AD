@@ -8,7 +8,7 @@ samtools: https://github.com/samtools/samtools
 
 taiyaki: https://github.com/nanoporetech/taiyaki/tree/master/taiyaki
 
-## Installation
+## Usage
 
 ### Incremental Learning
 
@@ -35,9 +35,11 @@ guppy_basecaller --input_path /path/to/input_reads --save_path /path/to/save_dir
 ### Anomaly Detection Training
 
 ```py
-python train.py model_template.py pretained_model.checkpoint input.hdf5 --device cuda:0 --outdir path/to/output \
---save_every epochs --niteration niterations --lr_max lr_max --lambda lambda --min_sub_batch_size batchsize
+python context_abnormal.py --device cuda:0 model_template.py initial_checkpoint.checkpoint \
+input.hdf5 --outdir path/to/output --save_every save_every --niteration niteration  --sig_win_len n --min_sub_batch_size BATCHSIZE --right_len m --can BASE
 ```
+
+**sig_win_len** and **right_len** are $n$ and $m$ we mentioned in the manuscript.
 
 ### Modification Inference
 
