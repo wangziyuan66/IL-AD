@@ -55,7 +55,11 @@ After these process, we can visualize the per site results from the bam file usi
 
 ### RNA splicing
 
-If you want to create training hdf5s or mapped reads for modification inference according to https://github.com/nanoporetech/taiyaki/tree/master#steps-from-fast5-files-to-basecalling, you should replace the `bin/get_ref_from_sam.py` in taiyaki with `scripts/rna_process/get_ref_from_sam_rna.py` in our project.
+If you are dealing with mRNA data and your reference is the genome reference fasta file, you need to pay more attention on RNA splicing.
+
+![splicing](https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fnature14524/MediaObjects/41586_2015_Article_BFnature14524_Fig1_HTML.jpg?)
+
+If you want to create training hdf5 files or mapped reads for modification inference according to https://github.com/nanoporetech/taiyaki/tree/master#steps-from-fast5-files-to-basecalling, you should replace the `bin/get_ref_from_sam.py` in taiyaki with `scripts/rna_process/get_ref_from_sam_rna.py` in our project.
 
 ### tRNA specific processing
 
