@@ -2,9 +2,9 @@
 
 We leverage machine learning approaches to adapt nanopore sequencing basecallers for nucleotide modification detection. We first apply the incremental learning technique to improve the basecalling of modification-rich sequences, which are usually of high biological interests. With sequence backbones resolved, we further run anomaly detection on individual nucleotides to determine their modification status. By this means, our pipeline promises the single-molecule, single-nucleotide and sequence context-free detection of modifications. 
 
-Supervised by [Dr. Hongxu Ding](hongxuding@arizona.edu) in University of Arizona, R. Ken Coit College of Pharmacy.
+Supervised by **Dr. Hongxu Ding**(hongxuding@arizona.edu) in University of Arizona, R. Ken Coit College of Pharmacy.
 
-![Ding](https://www.pharmacy.arizona.edu/sites/default/files/styles/az_medium/public/2023-05/HD3.png?itok=EBqnN-7q)
+ <p align='center'><img src="https://www.pharmacy.arizona.edu/sites/default/files/styles/az_medium/public/2023-05/HD3.png?itok=EBqnN-7q" width = "140" height = "200" alt="图片名称" align=center /></p>
 
 ## Pre-request
 
