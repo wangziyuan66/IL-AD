@@ -4,7 +4,7 @@ We leverage machine learning approaches to adapt nanopore sequencing basecallers
 
 Supervised by **Dr. Hongxu Ding**(hongxuding@arizona.edu) in University of Arizona, R. Ken Coit College of Pharmacy.
 
- <p align='center'><img src="https://www.pharmacy.arizona.edu/sites/default/files/styles/az_medium/public/2023-05/HD3.png?itok=EBqnN-7q" width = "140" height = "200" alt="图片名称" align=center /></p>
+<!--  <p align='center'><img src="https://www.pharmacy.arizona.edu/sites/default/files/styles/az_medium/public/2023-05/HD3.png?itok=EBqnN-7q" width = "140" height = "200" alt="图片名称" align=center /></p> -->
 
 ## Pre-request
 
@@ -97,6 +97,10 @@ ONT DNA and RNA kmer models were downloaded from https://github.com/nanoporetech
 Original DNA and RNA basecalling models were downloaded from https://github.com/nanoporetech/taiyaki/blob/master/models/mLstm_flipflop_model_r941_DNA.checkpoint and https://s3-eu-west-1.amazonaws.com/ont-research/taiyaki_modbase.tar.gz, respectively. 
 
 DNA and RNA taiyaki model templates were downloaded from https://github.com/nanoporetech/taiyaki/tree/master/models.
+
+## Pretrained model
+
+For DNA/RNA curlcake, the model after incremental learning and the model for modification inference are available at: .
 
 ## Citation & Contact
 
