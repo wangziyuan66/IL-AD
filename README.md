@@ -73,11 +73,11 @@ If you want to implement iterative labeling, you need to train model with `bin/t
 
 ![curlcake](images/rna.jpeg)
 
-<p align='center'><b>Accuracy on RNA  synthesized oligo (canonical, fully modified 5mC, 6mA, 1mA)</b></p>
+<p align='center'><b>Accuracy on DNA(canonical, fully modified 5mC, 5hmC, Pseudouridine)/RNA(canonical, fully modified 5mC, 6mA, 1mA) synthesized oligo</b></p>
 
-![curlcake](images/trna.jpeg)
+<!--![curlcake](images/trna.jpeg)
 
-<p align='center'><b>Incremental learning benefit the reads mappability of tRNA</b></p>
+<p align='center'><b>Incremental learning benefit the reads mappability of tRNA</b></p>-->
 
 ## Pretrained model
 
