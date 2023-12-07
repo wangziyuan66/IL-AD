@@ -56,7 +56,7 @@ After generating fasta file containing mod base we can use `modbase_tag.py` to w
 
 After these process, we can visualize the per site results from the bam file using `samtools mpileup`.
 
-### Miscellanies
+## Miscellanies
 
 ### RNA splicing
 
