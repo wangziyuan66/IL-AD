@@ -2,11 +2,10 @@
 
 We leverage machine learning approaches to adapt nanopore sequencing basecallers for nucleotide modification detection. We first apply the incremental learning technique to improve the basecalling of modification-rich sequences, which are usually of high biological interests. With sequence backbones resolved, we further run anomaly detection on individual nucleotides to determine their modification status. By this means, our pipeline promises the single-molecule, single-nucleotide and sequence context-free detection of modifications. 
 
-Supervised by **Dr. Hongxu Ding**(hongxuding@arizona.edu) in University of Arizona, R. Ken Coit College of Pharmacy.
 
 <!--  <p align='center'><img src="https://www.pharmacy.arizona.edu/sites/default/files/styles/az_medium/public/2023-05/HD3.png?itok=EBqnN-7q" width = "140" height = "200" alt="图片名称" align=center /></p> -->
 
-## Pre-request
+## Dependencies
 
 samtools: https://github.com/samtools/samtools
 
@@ -22,7 +21,7 @@ python train.py model_template.py pretained_model.checkpoint input.hdf5 --device
 --save_every epochs --niteration niterations --lr_max lr_max --lambda lambda --min_sub_batch_size batchsize
 ```
 
-Basecall: 
+### Basecalling 
 
 You should then be able to export your checkpoint to json (using bin/dump_json.py in [taiyaki](https://github.com/nanoporetech/taiyaki/tree/master)) that can be used to basecall with Guppy.
 
@@ -36,7 +35,7 @@ For example:
 guppy_basecaller --input_path /path/to/input_reads --save_path /path/to/save_dir --config dna_r9.4.1_450bps_flipflop.cfg --model path/to/model.json --device cuda:1
 ```
 
-### Anomaly Detection Training
+### Anomaly Detection
 
 ```sh
 python context_abnormal.py --device cuda:0 model_template.py initial_checkpoint.checkpoint \
@@ -57,11 +56,11 @@ After generating fasta file containing mod base we can use `modbase_tag.py` to w
 
 After these process, we can visualize the per site results from the bam file using `samtools mpileup`.
 
+### Miscellanies
+
 ### RNA splicing
 
 If you are dealing with mRNA data and your reference is the genome reference fasta file, you need to pay more attention on RNA splicing.
-
-![splicing](https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fnature14524/MediaObjects/41586_2015_Article_BFnature14524_Fig1_HTML.jpg?)
 
 If you want to create training hdf5 files or mapped reads for modification inference according to https://github.com/nanoporetech/taiyaki/tree/master#steps-from-fast5-files-to-basecalling, you should replace the `bin/get_ref_from_sam.py` in taiyaki with `scripts/rna_process/get_ref_from_sam_rna.py` in our project.
 
@@ -79,24 +78,6 @@ If you want to implement iterative labeling, you need to train model with `bin/t
 ![curlcake](images/trna.jpeg)
 
 <p align='center'><b>Incremental learning benefit the reads mappability of tRNA</b></p>
-
-## Data Code
-
-The yeast native tRNA nanopore sequencing data was downloaded from European National Archive (ENA) under accession number PRJEB55684. Corresponding reference genome and modification annotation were downloaded from https://github.com/novoalab/Nano-tRNAseq/tree/main/ref. 
-
-The CpG and GpC methylated, and the unmodified E.coli genomic DNA nanopore sequencing datasets were downloaded from https://sra-pub-src-2.s3.amazonaws.com/SRR11953238/ecoli_CpGGpC.fast5.tgz.2 and https://sra-pub-src-2.s3.amazonaws.com/SRR11953241/ecoli_Unmethylated.fast5.tgz.1, respectively.
-
-Corresponding reference genome was downloaded from https://www.ncbi.nlm.nih.gov/nuccore/U00096. The human HEK293 cell line native mRNA nanopore sequencing data was downloaded from ENA under accession number PRJEB40872. 
-
-Corresponding m1A and m6A ground-truth annotations were downloaded from the Supplementary Table 2 of 35 and the Supplementary Data 4 of 32, respectively. 
-
-The mouse ESC native mRNA nanopore sequencing data was downloaded from NCBI Sequence Read Archive (SRA) under the accession number SRP166020. Corresponding m6A ground-truth annotations were downloaded from NCBI Gene Expression Omnibus (GEO) under the accession number GSM2300431. DNA and RNA oligo datasets were deposited at SRA under the accession number. 
-
-ONT DNA and RNA kmer models were downloaded from https://github.com/nanoporetech/kmer_models. 
-
-Original DNA and RNA basecalling models were downloaded from https://github.com/nanoporetech/taiyaki/blob/master/models/mLstm_flipflop_model_r941_DNA.checkpoint and https://s3-eu-west-1.amazonaws.com/ont-research/taiyaki_modbase.tar.gz, respectively. 
-
-DNA and RNA taiyaki model templates were downloaded from https://github.com/nanoporetech/taiyaki/tree/master/models.
 
 ## Pretrained model
 
