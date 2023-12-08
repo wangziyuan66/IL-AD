@@ -79,7 +79,18 @@ python scripts/train.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py
 python taiyaki/bin/dump_json path/to/output/model_final.checkpoint -output path/to/output/model_final.json
 
 #### Basecalling
-guppy_basecaller --input_path raw/fast5/canonical --save_path path/to/output/canonical --align_ref $genome --align_type auto --bam_out --model_file $path/benchmark/set2_train/model.json --chunk_size $chunk --overlap $overlap --device cuda:0 --disable_qscore_filtering --input_file_list set2_${sample} $path/benchmark/${sample}_test.txt
+guppy_basecaller --input_path raw/fast5/canonical --save_path path/to/output/canonical --align_ref path/to/refrence/genome --align_type auto --bam_out --model_file path/to/output/model_final.json --chunk_size 60 --device cuda:0 --disable_qscore_filtering
+guppy_basecaller --input_path raw/fast5/5mc --save_path path/to/output/5mc --align_ref path/to/refrence/genome --align_type auto --bam_out --model_file path/to/output/model_final.json --chunk_size 60 --device cuda:0 --disable_qscore_filtering
+guppy_basecaller --input_path raw/fast5/5hmc --save_path path/to/output/5hmc --align_ref path/to/refrence/genome --align_type auto --bam_out --model_file path/to/output/model_final.json --chunk_size 60 --device cuda:0 --disable_qscore_filtering
+guppy_basecaller --input_path raw/fast5/u --save_path path/to/output/u --align_ref path/to/refrence/genome --align_type auto --bam_out --model_file path/to/output/model_final.json --chunk_size 60 --device cuda:0 --disable_qscore_filtering
+
+##################################################################################################################################################################################################################
+############ Prepare hdf5 using steps at taiyaki #################################################################################################################################################################
+############bin/generate_per_read_params.py <directory containing fast5 files> --output <name of output per_read_tsv file>                                                               #########################
+############bin/get_refs_from_sam.py <genomic references fasta> <one or more SAM/BAM files> --output <name of output reference_fasta>                                                    #########################
+############bin/prepare_mapped_reads.py <directory containing fast5 files> <per_read_tsv> <output mapped_signal_file>  <file containing model for remapping>  <reference_fasta>          #########################
+############bin/train_flipflop.py --device <digit specifying GPU> <pytorch model definition> <mapped-signal files to train with>                                                         #########################
+##################################################################################################################################################################################################################
 
 #### Anomaly Detection Training
 
