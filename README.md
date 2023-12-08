@@ -73,6 +73,8 @@ If you want to implement iterative labeling, you need to train model with `bin/t
 
 Example for the DNA modification detection using IL-AD for the figure below.
 
+**IL Step**:
+
 ```sh
 #### Incremental learning
 python scripts/train.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint train.hdf5 --outdir path/to/output --save_every 100 --niteration 500 --warmup_batches 5 --lr_max 5.0e-5
@@ -84,19 +86,57 @@ guppy_basecaller --input_path raw/fast5/5mc --save_path path/to/output/5mc --ali
 guppy_basecaller --input_path raw/fast5/5hmc --save_path path/to/output/5hmc --align_ref path/to/refrence/genome --align_type auto --bam_out --model_file path/to/output/model_final.json --chunk_size 60 --device cuda:0 --disable_qscore_filtering
 guppy_basecaller --input_path raw/fast5/u --save_path path/to/output/u --align_ref path/to/refrence/genome --align_type auto --bam_out --model_file path/to/output/model_final.json --chunk_size 60 --device cuda:0 --disable_qscore_filtering
 
-##################################################################################################################################################################################################################
-############ Prepare hdf5 using steps at taiyaki #################################################################################################################################################################
-############bin/generate_per_read_params.py <directory containing fast5 files> --output <name of output per_read_tsv file>                                                               #########################
-############bin/get_refs_from_sam.py <genomic references fasta> <one or more SAM/BAM files> --output <name of output reference_fasta>                                                    #########################
-############bin/prepare_mapped_reads.py <directory containing fast5 files> <per_read_tsv> <output mapped_signal_file>  <file containing model for remapping>  <reference_fasta>          #########################
-############bin/train_flipflop.py --device <digit specifying GPU> <pytorch model definition> <mapped-signal files to train with>                                                         #########################
-##################################################################################################################################################################################################################
+```
 
+Prepare hdf5 using steps at taiyaki
+
+```sh
+bin/generate_per_read_params.py <directory containing fast5 files> --output <name of output per_read_tsv file>
+
+bin/get_refs_from_sam.py <genomic references fasta> <one or more SAM/BAM files> --output <name of output reference_fasta>
+
+bin/prepare_mapped_reads.py <directory containing fast5 files> <per_read_tsv> <output mapped_signal_file>  <file containing model for remapping>  <reference_fasta>
+
+bin/train_flipflop.py --device <digit specifying GPU> <pytorch model definition> <mapped-signal files to train with>
+```
+
+After we generate the `test.hdf5`, we implement modification inference.
+
+```sh
 #### Anomaly Detection Training
+python scripts/context_abnormal.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint \
+$path/datasets/canonical/train.hdf5 --outdir path/to/output/c --save_every 200 --niteration 2000 --warmup_batches 50 --sig_win_len 20 --can C --min_sub_batch_size 1024 --right_len 10
+
+python scripts/context_abnormal.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint \
+$path/datasets/canonical/train.hdf5 --outdir path/to/output/c --save_every 200 --niteration 2000 --warmup_batches 50 --sig_win_len 20 --can T --min_sub_batch_size 1024 --right_len 10
+
+python scripts/context_abnormal.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint \
+path/to/5mC/train.hdf5 --outdir path/to/output/5mc --save_every 200 --niteration 2000 --warmup_batches 50 --sig_win_len 20 --can m --min_sub_batch_size 1024 --right_len 10
+
+python scripts/context_abnormal.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint \
+path/to/5hmC/train.hdf5 --outdir path/to/output/5hmc --save_every 200 --niteration 2000 --warmup_batches 50 --sig_win_len 20 --can h --min_sub_batch_size 1024 --right_len 10
+
+python scripts/context_abnormal.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint \
+path/to/u/train.hdf5 --outdir path/to/output/u --save_every 200 --niteration 2000 --warmup_batches 50 --sig_win_len 20 --can u --min_sub_batch_size 1024 --right_len 10
 
 #### Modification Inference
 
+# c 5mc 5hmc
 
+python scripts/modification_inference.py test.hdf5 path/to/output/c/model_final.checkpoint path/to/output/5mc/model_final.checkpoint C m path/to/output/fasta/m.fasta --can_base_idx 0123 --length 20 --right_len 10
+python scripts/modification_inference.py test.hdf5 path/to/output/c/model_final.checkpoint path/to/output/5hmc/model_final.checkpoint C h path/to/output/fasta/h.fasta --can_base_idx 0123 --length 20 --right_len 10
+python scripts/modbase_tag.py path/to/output/merge.sorted.bam(IL)  path/to/output/fasta/m.fasta  path/to/output/fasta/m.ml path/to/output/bam/m.bam --can C --mod m 
+python scripts/modbase_tag.py path/to/output/merge.sorted.bam(IL)  path/to/output/fasta/h.fasta  path/to/output/fasta/h.ml path/to/output/bam/h.bam --can C --mod h
+
+# T u
+python scripts/modification_inference.py test.hdf5 path/to/output/t/model_final.checkpoint path/to/output/u/model_final.checkpoint T u path/to/output/fasta/u.fasta --can_base_idx 0123 --length 20 --right_len 10
+python scripts/modbase_tag.py path/to/output/merge.sorted.bam(IL)  path/to/output/fasta/u.fasta  path/to/output/fasta/u.ml path/to/output/bam/u.bam --can C --mod h
+```
+
+If we have more than one kind of modification for one base, please first use `samtools` to sort and index all the output bam files, and then:
+
+```sh
+python scripts/merge_bam.py path/to/output/bam/merge.bam path/to/output/bam/m.sorted.bam path/to/output/bam/h.sorted.bam 
 ```
 
 ![curlcake](images/rna.jpeg)
