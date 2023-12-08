@@ -149,7 +149,7 @@ python scripts/merge_bam.py path/to/output/bam/merge.bam path/to/output/bam/m.so
 
 ## Pretrained model
 
-For DNA/RNA curlcake, the model after incremental learning and the model for modification inference are available at: .
+For DNA/RNA curlcake, the model after incremental learning and the model for modification inference are available at models.
 
 ## Citation & Contact
 
