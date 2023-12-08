@@ -71,6 +71,23 @@ If you want to implement iterative labeling, you need to train model with `bin/t
 
 ## Results
 
+Example for the DNA modification detection using IL-AD for the figure below.
+
+```sh
+#### Incremental learning
+python scripts/train.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint train.hdf5 --outdir path/to/output --save_every 100 --niteration 500 --warmup_batches 5 --lr_max 5.0e-5
+python taiyaki/bin/dump_json path/to/output/model_final.checkpoint -output path/to/output/model_final.json
+
+#### Basecalling
+guppy_basecaller --input_path raw/fast5/canonical --save_path path/to/output/canonical --align_ref $genome --align_type auto --bam_out --model_file $path/benchmark/set2_train/model.json --chunk_size $chunk --overlap $overlap --device cuda:0 --disable_qscore_filtering --input_file_list set2_${sample} $path/benchmark/${sample}_test.txt
+
+#### Anomaly Detection Training
+
+#### Modification Inference
+
+
+```
+
 ![curlcake](images/rna.jpeg)
 
 <p align='center'><b>Accuracy on DNA(canonical, fully modified 5mC, 5hmC, Pseudouridine)/RNA(canonical, fully modified 5mC, 6mA, 1mA) synthesized oligo</b></p>
