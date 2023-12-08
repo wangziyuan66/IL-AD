@@ -73,7 +73,7 @@ If you want to implement iterative labeling, you need to train model with `bin/t
 
 Example for the DNA modification detection using IL-AD for the figure below.
 
-**IL Step**:
+**IL-STEP**:
 
 ```sh
 #### Incremental learning
@@ -100,7 +100,7 @@ bin/prepare_mapped_reads.py <directory containing fast5 files> <per_read_tsv> <o
 bin/train_flipflop.py --device <digit specifying GPU> <pytorch model definition> <mapped-signal files to train with>
 ```
 
-After we generate the `test.hdf5`, we implement modification inference.
+After we generate the `test.hdf5`, we implement modification inference. **AD-STEP**
 
 ```sh
 #### Anomaly Detection Training
