@@ -17,7 +17,7 @@ taiyaki: https://github.com/nanoporetech/taiyaki/tree/master/taiyaki
 
 Training Process
 ```sh
-python scripts/train.py model_template.py pretained_model.checkpoint input.hdf5 --device cuda:0 --outdir path/to/output \
+python ./scripts/train.py model_template.py pretained_model.checkpoint input.hdf5 --device cuda:0 --outdir path/to/output \
 --save_every epochs --niteration niterations --lr_max lr_max --lambda lambda --min_sub_batch_size batchsize
 ```
 
@@ -40,7 +40,7 @@ guppy_basecaller --input_path /path/to/input_reads --save_path /path/to/save_dir
 ### Anomaly Detection
 
 ```sh
-python scripts/context_abnormal.py --device cuda:0 model_template.py initial_checkpoint.checkpoint \
+python ./scripts/context_abnormal.py --device cuda:0 model_template.py initial_checkpoint.checkpoint \
 input.hdf5 --outdir path/to/output --save_every save_every --niteration niteration  --sig_win_len n --min_sub_batch_size BATCHSIZE --right_len m --can BASE
 ```
 
@@ -49,7 +49,7 @@ input.hdf5 --outdir path/to/output --save_every save_every --niteration niterati
 ### Modification Inference
 
 ```sh
-python scripts/modification_inference.py mapped_reads.hdf5 can.checkpoint mod.checkpoint CANBASE MODBASE path/to/output/fasta --can_base_idx can_base_idx --type rna/dna --length n --right_len m
+python ./scripts/modification_inference.py mapped_reads.hdf5 can.checkpoint mod.checkpoint CANBASE MODBASE path/to/output/fasta --can_base_idx can_base_idx --type rna/dna --length n --right_len m
 ```
 
 can_base_idx means the mapping from alphabet labels in the hdf5 files to canonical labels(**default** 0123 ATGC). For example, for a hdf5 whose labels are ACm(5mC)h(5hmC)GT, the can_base_idx should be 01123.
@@ -64,11 +64,11 @@ After these process, we can visualize the per site results from the bam file usi
 
 If you are dealing with mRNA data and your reference is the genome reference fasta file, you need to pay more attention on RNA splicing.
 
-If you want to create training hdf5 files or mapped reads for modification inference according to https://github.com/nanoporetech/taiyaki/tree/master#steps-from-fast5-files-to-basecalling, you should replace the `bin/get_ref_from_sam.py` in taiyaki with `scripts/rna_process/get_ref_from_sam_rna.py` in our project.
+If you want to create training hdf5 files or mapped reads for modification inference according to https://github.com/nanoporetech/taiyaki/tree/master#steps-from-fast5-files-to-basecalling, you should replace the `bin/get_ref_from_sam.py` in taiyaki with `./scripts/rna_process/get_ref_from_sam_rna.py` in our project.
 
 ### tRNA specific processing
 
-If you want to implement iterative labeling, you need to train model with `bin/train_flip_flop.py` in taiyaki. However, if you need to handle with tRNA data, please replace it with `scripts/trna/train_flip_flop.py` in our project.
+If you want to implement iterative labeling, you need to train model with `bin/train_flip_flop.py` in taiyaki. However, if you need to handle with tRNA data, please replace it with `./scripts/trna/train_flip_flop.py` in our project.
 
 
 ## Results
@@ -79,7 +79,7 @@ Example for the DNA modification detection using IL-AD for the figure below.
 
 ```sh
 #### Incremental learning
-python scripts/train.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint train.hdf5 --outdir path/to/output --save_every 100 --niteration 500 --warmup_batches 5 --lr_max 5.0e-5
+python ./scripts/train.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint train.hdf5 --outdir path/to/output --save_every 100 --niteration 500 --warmup_batches 5 --lr_max 5.0e-5
 python taiyaki/bin/dump_json path/to/output/model_final.checkpoint -output path/to/output/model_final.json
 
 #### Basecalling
@@ -106,39 +106,39 @@ After we generate the `test.hdf5`, we implement modification inference. **AD-STE
 
 ```sh
 #### Anomaly Detection Training
-python scripts/context_abnormal.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint \
+python ./scripts/context_abnormal.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint \
 $path/datasets/canonical/train.hdf5 --outdir path/to/output/c --save_every 200 --niteration 2000 --warmup_batches 50 --sig_win_len 20 --can C --min_sub_batch_size 1024 --right_len 10
 
-python scripts/context_abnormal.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint \
+python ./scripts/context_abnormal.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint \
 $path/datasets/canonical/train.hdf5 --outdir path/to/output/c --save_every 200 --niteration 2000 --warmup_batches 50 --sig_win_len 20 --can T --min_sub_batch_size 1024 --right_len 10
 
-python scripts/context_abnormal.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint \
+python ./scripts/context_abnormal.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint \
 path/to/5mC/train.hdf5 --outdir path/to/output/5mc --save_every 200 --niteration 2000 --warmup_batches 50 --sig_win_len 20 --can m --min_sub_batch_size 1024 --right_len 10
 
-python scripts/context_abnormal.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint \
+python ./scripts/context_abnormal.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint \
 path/to/5hmC/train.hdf5 --outdir path/to/output/5hmc --save_every 200 --niteration 2000 --warmup_batches 50 --sig_win_len 20 --can h --min_sub_batch_size 1024 --right_len 10
 
-python scripts/context_abnormal.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint \
+python ./scripts/context_abnormal.py --device cuda:0 taiyaki/models/mLstm_cat_mod_flipflop.py taiyaki/models/mLstm_flipflop_model_r941_DNA.checkpoint \
 path/to/u/train.hdf5 --outdir path/to/output/u --save_every 200 --niteration 2000 --warmup_batches 50 --sig_win_len 20 --can u --min_sub_batch_size 1024 --right_len 10
 
 #### Modification Inference
 
 # c 5mc 5hmc
 
-python scripts/modification_inference.py test.hdf5 path/to/output/c/model_final.checkpoint path/to/output/5mc/model_final.checkpoint C m path/to/output/fasta/m.fasta --can_base_idx 0123 --length 20 --right_len 10
-python scripts/modification_inference.py test.hdf5 path/to/output/c/model_final.checkpoint path/to/output/5hmc/model_final.checkpoint C h path/to/output/fasta/h.fasta --can_base_idx 0123 --length 20 --right_len 10
-python scripts/modbase_tag.py path/to/output/merge.sorted.bam(IL)  path/to/output/fasta/m.fasta  path/to/output/fasta/m.ml path/to/output/bam/m.bam --can C --mod m 
-python scripts/modbase_tag.py path/to/output/merge.sorted.bam(IL)  path/to/output/fasta/h.fasta  path/to/output/fasta/h.ml path/to/output/bam/h.bam --can C --mod h
+python ./scripts/modification_inference.py test.hdf5 path/to/output/c/model_final.checkpoint path/to/output/5mc/model_final.checkpoint C m path/to/output/fasta/m.fasta --can_base_idx 0123 --length 20 --right_len 10
+python ./scripts/modification_inference.py test.hdf5 path/to/output/c/model_final.checkpoint path/to/output/5hmc/model_final.checkpoint C h path/to/output/fasta/h.fasta --can_base_idx 0123 --length 20 --right_len 10
+python ./scripts/modbase_tag.py path/to/output/merge.sorted.bam(IL)  path/to/output/fasta/m.fasta  path/to/output/fasta/m.ml path/to/output/bam/m.bam --can C --mod m 
+python ./scripts/modbase_tag.py path/to/output/merge.sorted.bam(IL)  path/to/output/fasta/h.fasta  path/to/output/fasta/h.ml path/to/output/bam/h.bam --can C --mod h
 
 # T u
-python scripts/modification_inference.py test.hdf5 path/to/output/t/model_final.checkpoint path/to/output/u/model_final.checkpoint T u path/to/output/fasta/u.fasta --can_base_idx 0123 --length 20 --right_len 10
-python scripts/modbase_tag.py path/to/output/merge.sorted.bam(IL)  path/to/output/fasta/u.fasta  path/to/output/fasta/u.ml path/to/output/bam/u.bam --can C --mod h
+python ./scripts/modification_inference.py test.hdf5 path/to/output/t/model_final.checkpoint path/to/output/u/model_final.checkpoint T u path/to/output/fasta/u.fasta --can_base_idx 0123 --length 20 --right_len 10
+python ./scripts/modbase_tag.py path/to/output/merge.sorted.bam(IL)  path/to/output/fasta/u.fasta  path/to/output/fasta/u.ml path/to/output/bam/u.bam --can C --mod h
 ```
 
 If we have more than one kind of modification for one base, please first use `samtools` to sort and index all the output bam files, and then:
 
 ```sh
-python scripts/merge_bam.py path/to/output/bam/merge.bam path/to/output/bam/m.sorted.bam path/to/output/bam/h.sorted.bam 
+python ./scripts/merge_bam.py path/to/output/bam/merge.bam path/to/output/bam/m.sorted.bam path/to/output/bam/h.sorted.bam 
 ```
 
 ![curlcake](images/rna.jpeg)
