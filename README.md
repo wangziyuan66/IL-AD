@@ -21,6 +21,8 @@ python scripts/train.py model_template.py pretained_model.checkpoint input.hdf5 
 --save_every epochs --niteration niterations --lr_max lr_max --lambda lambda --min_sub_batch_size batchsize
 ```
 
+
+
 ### Basecalling 
 
 You should then be able to export your checkpoint to json (using bin/dump_json.py in [taiyaki](https://github.com/nanoporetech/taiyaki/tree/master)) that can be used to basecall with Guppy.
