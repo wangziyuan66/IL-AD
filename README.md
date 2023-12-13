@@ -92,8 +92,6 @@ python ./scripts/modification_inference.py mapped_reads.hdf5 can.checkpoint mod.
 `--length n --right_len m`: the length of signal the AD model extracts **left n plus right n+m points** from the starting point of the candidate base.
 
 
-can_base_idx means the mapping from alphabet labels in the hdf5 files to canonical labels(**default** 0123 ATGC). For example, for a hdf5 whose labels are ACm(5mC)h(5hmC)GT, the can_base_idx should be 01123.
-
 After generating fasta file containing mod base we can use `modbase_tag.py` to write ML/MM tag into the bam file. We can merge ML/MM tags from different bams containing different kinds of modifications using `merge_bam.py`.
 
 After these process, we can visualize the per site results from the bam file using `samtools mpileup`.
