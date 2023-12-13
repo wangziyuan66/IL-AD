@@ -113,7 +113,7 @@ Example for the DNA curlcake oligo modification detection using IL-AD for the fi
 
 Reference sequence of DNA oligo can be find in [here](https://github.com/wangziyuan66/IL-AD/blob/main/reference/dna.fa).
 
-**IL-STEP**:
+**IL-Step**:
 
 ```sh
 #### Incremental learning
@@ -140,7 +140,9 @@ bin/prepare_mapped_reads.py <directory containing fast5 files> <per_read_tsv> <o
 bin/train_flipflop.py --device <digit specifying GPU> <pytorch model definition> <mapped-signal files to train with>
 ```
 
-After we generate the `test.hdf5`, we implement modification inference. **AD-STEP**
+After we generate the `test.hdf5`, we implement modification inference.
+
+**AD-Step**
 
 ```sh
 #### Anomaly Detection Training
@@ -179,7 +181,7 @@ If we have more than one kind of modification for one base, please first use `sa
 python ./scripts/merge_bam.py path/to/output/bam/merge.bam path/to/output/bam/m.sorted.bam path/to/output/bam/h.sorted.bam 
 ```
 
-**ILAD for DNA(canonical, fully modified 5mC, 5hmC, Pseudouridine) synthesized oligo**
+**IL-AD Results for DNA Oligo**
 
 ![curlcake](images/dna.png) 
 
