@@ -107,7 +107,7 @@ If you want to create training hdf5 files or mapped reads for modification infer
 If you want to implement iterative labeling, you need to train model with `bin/train_flip_flop.py` in taiyaki. However, if you need to handle with tRNA data, please replace it with `./scripts/trna/train_flip_flop.py` in our project.
 
 
-## Results
+## Example
 
 Example for the DNA modification detection using IL-AD for the figure below.
 
