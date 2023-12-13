@@ -33,14 +33,14 @@ python ./scripts/train.py model_template.py pretained_model.checkpoint input.hdf
 
 `--save_every epochs`: Save the checkpoint every `epochs` iterations
 
-`niterations`: the number of iterations in IL
+`--niterations niterations`: the number of iterations in IL
 
-`lr_max`: the default learning rate in AdamW optimizer
+`--lr_max lr_max`: the default learning rate in AdamW optimizer
 
-`lambda`: we balanced $L_{CTC}$ and $L_{RBKD}$ using hyperparameter $\lambda$. $L_{CTC}$ speficies Connectionist Temporal Classification loss which calculates loss between the nanopore signal and target basecalled DNA/RNA sequence. $L_{RBKD}$ specified Response-Based Knowledge Distillation
+`--lambda lambda`: we balanced $L_{CTC}$ and $L_{RBKD}$ using hyperparameter $\lambda$. $L_{CTC}$ speficies Connectionist Temporal Classification loss which calculates loss between the nanopore signal and target basecalled DNA/RNA sequence. $L_{RBKD}$ specified Response-Based Knowledge Distillation
 (RBKD) which is the mechanisms to help prevent catastrophic forgetting.
 
-`batchsize`: batchsize of the IL training
+`--min_sub_batch_size batchsize`: batchsize of the IL training
 
 ### Basecalling 
 
