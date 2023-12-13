@@ -75,7 +75,7 @@ input.hdf5 --outdir path/to/output --save_every save_every --niteration niterati
 python ./scripts/modification_inference.py mapped_reads.hdf5 can.checkpoint mod.checkpoint CANBASE MODBASE path/to/output/fasta --can_base_idx can_base_idx --type rna/dna --length n --right_len m
 ```
 
-`mapped_reads.hdf5`: reads to be analyzed generated stored in hdf5 format, following [taiyki workflow](https://github.com/nanoporetech/taiyaki/tree/master?tab=readme-ov-file#steps-from-fast5-files-to-basecalling).
+`mapped_reads.hdf5`: reads to be analyzed stored in hdf5 format, following [taiyki workflow](https://github.com/nanoporetech/taiyaki/tree/master?tab=readme-ov-file#steps-from-fast5-files-to-basecalling).
 
 `can.checkpoint`: the AD-trained using canonical training dataset.
 
