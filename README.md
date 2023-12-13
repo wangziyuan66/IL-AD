@@ -70,7 +70,7 @@ input.hdf5 --outdir path/to/output --save_every save_every --niteration niterati
 
 `--sig_win_len n`: then length of signal the AD model extracts **left n plus right n points** from the starting point of the candidate base.
 
-`--right_len n`: then length of more signal the AD model extracts **right n points** from the starting point of the candidate base.
+`--right_len m`: then length of more signal the AD model extracts **right n points** from the starting point of the candidate base.
 $n$ and $m$ we mentioned ind etail in the manuscript.
 
 ### Modification Inference
