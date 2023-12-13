@@ -96,13 +96,13 @@ After generating fasta file containing mod base we can use `./scripts/modbase_ta
 
 ## Miscellanies
 
-### RNA splicing
+### RNA Splicing
 
 If you are dealing with mRNA data and your reference is the genome reference fasta file, you need to pay more attention on RNA splicing.
 
 If you want to create training hdf5 files or mapped reads for modification inference according to https://github.com/nanoporetech/taiyaki/tree/master#steps-from-fast5-files-to-basecalling, you should replace the `bin/get_ref_from_sam.py` in taiyaki with `./scripts/rna_process/get_ref_from_sam_rna.py` in our project.
 
-### tRNA specific processing
+### tRNA Specific Processing
 
 If you want to implement iterative labeling, you need to train model with `bin/train_flip_flop.py` in taiyaki. However, if you need to handle with tRNA data, please replace it with `./scripts/trna/train_flip_flop.py` in our project.
 
