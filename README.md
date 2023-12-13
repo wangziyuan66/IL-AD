@@ -51,9 +51,8 @@ Specifically, key options include selecting the Guppy config file to be appropri
 For example:
 
 ```sh
-guppy_basecaller --input_path /path/to/input_reads --save_path /path/to/save_dir --config dna_r9.4.1_450bps_flipflop.cfg --model path/to/model.json --device cuda:1
+guppy_basecaller --input_path /path/to/input_reads --save_path /path/to/save_dir --config path/to/config --model path/to/model --device cuda:0
 ```
-`--model path/to/model.json` specifies the json format of trained IL model. Using `bin\dump_json.py` to transform the trained IL model from checkpoint fomat to json format.
 
 ### Anomaly Detection
 
