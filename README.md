@@ -109,7 +109,9 @@ If you want to implement iterative labeling, you need to train model with `bin/t
 
 ## Example
 
-Example for the DNA modification detection using IL-AD for the figure below.
+Example for the DNA curlcake oligo modification detection using IL-AD for the figure below.
+
+Reference sequence of DNA oligo can be find in reference/dna.fa 
 
 **IL-STEP**:
 
@@ -185,7 +187,7 @@ python ./scripts/merge_bam.py path/to/output/bam/merge.bam path/to/output/bam/m.
 
 <p align='center'><b>Incremental learning benefit the reads mappability of tRNA</b></p>-->
 
-## Pretrained model
+## Pretrained Model
 
 For DNA/RNA curlcake, the model after incremental learning and the model for modification inference are available at models.
 
