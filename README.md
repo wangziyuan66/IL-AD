@@ -111,7 +111,7 @@ If you want to implement iterative labeling, you need to train model with `bin/t
 
 Example for the DNA curlcake oligo modification detection using IL-AD for the figure below.
 
-Reference sequence of DNA oligo can be find in reference/dna.fa 
+Reference sequence of DNA oligo can be find in [here](https://github.com/wangziyuan66/IL-AD/blob/main/reference/dna.fa).
 
 **IL-STEP**:
 
@@ -179,9 +179,9 @@ If we have more than one kind of modification for one base, please first use `sa
 python ./scripts/merge_bam.py path/to/output/bam/merge.bam path/to/output/bam/m.sorted.bam path/to/output/bam/h.sorted.bam 
 ```
 
-![curlcake](images/rna.jpeg)
+![curlcake](images/dna.png)
 
-<p align='center'><b>Accuracy on DNA(canonical, fully modified 5mC, 5hmC, Pseudouridine)/RNA(canonical, fully modified 5mC, 6mA, 1mA) synthesized oligo</b></p>
+<p align='center'><b>Accuracy on DNA(canonical, fully modified 5mC, 5hmC, Pseudouridine) synthesized oligo</b></p>
 
 <!--![curlcake](images/trna.jpeg)
 
