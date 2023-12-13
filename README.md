@@ -179,9 +179,11 @@ If we have more than one kind of modification for one base, please first use `sa
 python ./scripts/merge_bam.py path/to/output/bam/merge.bam path/to/output/bam/m.sorted.bam path/to/output/bam/h.sorted.bam 
 ```
 
-<p align='center'>![curlcake](images/dna.png)</p>
+**ILAD for DNA(canonical, fully modified 5mC, 5hmC, Pseudouridine) synthesized oligo**
 
-<p align='center'><b>Accuracy on DNA(canonical, fully modified 5mC, 5hmC, Pseudouridine) synthesized oligo</b></p>
+![curlcake](images/dna.png) 
+
+
 
 <!--![curlcake](images/trna.jpeg)
 
