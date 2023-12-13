@@ -92,9 +92,7 @@ python ./scripts/modification_inference.py input.hdf5 can.checkpoint mod.checkpo
 `--length n --right_len m`: the length of signal the AD model extracts **left n plus right n+m points** from the starting point of the candidate base.
 
 
-After generating fasta file containing mod base we can use `modbase_tag.py` to write ML/MM tag into the bam file. We can merge ML/MM tags from different bams containing different kinds of modifications using `merge_bam.py`.
-
-After these process, we can visualize the per site results from the bam file using `samtools mpileup`.
+After generating fasta file containing mod base we can use `./scripts/modbase_tag.py` to write ML/MM tag into the bam file. We can merge ML/MM tags from different bams containing different kinds of modifications using `./scripts/merge_bam.py`.
 
 ## Miscellanies
 
