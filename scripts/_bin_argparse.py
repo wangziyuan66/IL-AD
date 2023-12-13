@@ -213,13 +213,10 @@ def get_train_flipflop_parser():
         '--lambda_value', type=float, default=1,
         help='incremental_learning_parameters lambda')
     parser.add_argument(
-        '--can', type=str,default="C",
-        help='incremental_learning_parameters lambda')
+        '--can', type=str,default="C")
     parser.add_argument(
-        '--right_len', type=int,default=0,
-        help='incremental_learning_parameters lambda')
+        '--right_len', type=int,default=0)
     parser.add_argument(
-        '--mod_num', type=int,default=None,
-        help='incremental_learning_parameters lambda')
+        '--mod_num', type=int,default=None)
 
     return parser
