@@ -37,7 +37,7 @@ python ./scripts/train.py model_template.py pretained_model.checkpoint input.hdf
 
 `lr_max`: the default learning rate in AdamW optimizer
 
-`lambda`: $\lambda$ paramter for knowledage distillation
+`lambda`: We balanced $L_{CTC}$ and $L_{RBKD}$ using hyperparameter $\lambda$
 
 `batchsize`: batchsize of the IL training
 
