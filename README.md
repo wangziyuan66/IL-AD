@@ -43,7 +43,7 @@ python ./scripts/train.py model_template.py pretained_model.checkpoint input.hdf
 
 ### Basecalling 
 
-You should then be able to export your checkpoint to json (using bin/dump_json.py in [taiyaki](https://github.com/nanoporetech/taiyaki/tree/master)) that can be used to basecall with Guppy.
+You should then be able to export your checkpoint to json (using `bin/dump_json.py` in [taiyaki](https://github.com/nanoporetech/taiyaki/tree/master)) that can be used to basecall with Guppy.
 
 See Guppy documentation for more information on how to do this.
 
