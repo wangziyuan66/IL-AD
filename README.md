@@ -44,20 +44,15 @@ python ./scripts/train.py model_template.py pretained_model.checkpoint input.hdf
 
 ### Basecalling 
 
-You should then be able to export your checkpoint to json (using `bin/dump_json.py` in [taiyaki](https://github.com/nanoporetech/taiyaki/tree/master)) that can be used to basecall with Guppy.
+You should then be able to export your checkpoint to json (using `bin/dump_json.py` in [taiyaki](https://github.com/nanoporetech/taiyaki/tree/master)) that can be used to basecall with Guppy. The Guppy usage can be seen using `guppy_basecaller --help`.
 
-See Guppy documentation for more information on how to do this.
-
-Key options include selecting the Guppy config file to be appropriate for your application, and passing the complete path of your .json file.
+Specifically, key options include selecting the Guppy config file to be appropriate for your application, and passing the complete path of your .json file.
 
 For example:
 
 ```sh
 guppy_basecaller --input_path /path/to/input_reads --save_path /path/to/save_dir --config dna_r9.4.1_450bps_flipflop.cfg --model path/to/model.json --device cuda:1
 ```
-
-The guppy_basecaller usage can be seen using `guppy_basecaller --help`.
-
 `--model path/to/model.json` specifies the json format of trained IL model. Using `bin\dump_json.py` to transform the trained IL model from checkpoint fomat to json format.
 
 ### Anomaly Detection
