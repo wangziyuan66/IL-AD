@@ -57,7 +57,7 @@ guppy_basecaller --input_path /path/to/input_reads --save_path /path/to/save_dir
 
 The guppy_basecaller usage can be seen using `guppy_basecaller --help`.
 
-`-model path/to/model.json` specifies the json format of trained IL model. Using `bin\dump_json.py` to transform the trained IL model from checkpoint fomat to json format.
+`--model path/to/model.json` specifies the json format of trained IL model. Using `bin\dump_json.py` to transform the trained IL model from checkpoint fomat to json format.
 
 ### Anomaly Detection
 
