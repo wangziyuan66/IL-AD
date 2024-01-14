@@ -93,25 +93,27 @@ def get_parser():
         help="The inference model")
     parser.add_argument(
         "can", type=str,
-        help="The inference model")
+        help="the canonical label of the candidate base")
     parser.add_argument(
         "mod", type=str,
-        help="The inference model")
+        help="the modification label of the candidate base")
     parser.add_argument(
         '--can_base_idx', default=[0,1,1,2,3], 
-        help='Write output in fastq format (default is fasta)')
+        help='The mapping from alphabet labels in the hdf5 files to canonical labels(default 0123 ATGC).'+
+        'For example, for a hdf5 whose labels are ACm(5mC)h(5hmC)GT, the can_base_idx should be 01123.')
     parser.add_argument(
         "output", type=str,
         help="The fasta file to output")
     parser.add_argument(
         "--limit", type=Positive(int),default=None,
-        help="The fasta file to output")
+        help="The number of reads to basecall")
     parser.add_argument(
         "--length", type=int,default=100,
-        help="The fasta file to output")
+        help="The length n of signal the AD model extracts left n plus "+
+        "right n+m points from the starting point of the candidate base.")
     parser.add_argument(
         "--type", type=str,default="dna",
-        help="The fasta file to output")
+        help="dna/rna type if rna reverse the sequence")
     parser.add_argument(
         "thredhold", action=FileExists,
         help="The thredhold for kmers file to output")
