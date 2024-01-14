@@ -93,20 +93,18 @@ def get_parser():
         "input_hdf5", action=FileExists,
         help="The hdf5 to input")
     parser.add_argument(
-        "can_model", action=FileExists,
-        help="The inference model")
-    parser.add_argument(
-        "mod_model", action=FileExists,
+        "inference_model", action=FileExists,
         help="The inference model")
     parser.add_argument(
         "can", type=str,
-        help="The target base in canonical alphabet(ACGT)")
+        help="the canonical label of the candidate base")
     parser.add_argument(
         "mod", type=str,
-        help="The corresponding label for modification for the target base (y:m6A, m:5mC, h:5hmC)")
+        help="the modification label of the candidate base")
     parser.add_argument(
         '--can_base_idx', default=[0,1,1,2,3], 
-        help='Write output in fastq format (default is fasta)')
+        help='The mapping from alphabet labels in the hdf5 files to canonical labels(default 0123 ATGC).'+
+        'For example, for a hdf5 whose labels are ACm(5mC)h(5hmC)GT, the can_base_idx should be 01123.')
     parser.add_argument(
         "output", type=str,
         help="The fasta file to output")
@@ -124,7 +122,6 @@ def get_parser():
         help='length for one base')
     parser.add_argument(
         '--scale', type=float,default=3)
-    
 
     return parser
 
