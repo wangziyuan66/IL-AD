@@ -13,11 +13,12 @@ def get_parser():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument(
         "output",
-        help="Input BAM file containing reads to basecall")
+        help="Output BAM file containing several different kinds of modification")
     parser.add_argument(
         "bam_files",nargs = "+",
-        help="Input BAM file containing reads to basecall")
+        help="Input BAM file containing reads to mm/ml tag")
     return parser
+    
 def merge(bam_files,output_bam):
     ref_bam = pysam.AlignmentFile(bam_files[0],"rb")
     ref_reads = list(ref_bam.fetch())
