@@ -25,10 +25,10 @@ def get_parser():
         help="Output directory to write basecalled sequences to")
     parser.add_argument(
         "--can",default = "C",
-        help="Output directory to write basecalled sequences to")
+        help="The the label for target base in canonical alphebet(ACGT)")
     parser.add_argument(
         "--mod",default = "m",
-        help="Output directory to write basecalled sequences to")
+        help="The the label for target base in modification alphebet(e.g y(m6A), x(m1A))")
     return parser
 
 
