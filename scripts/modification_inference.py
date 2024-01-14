@@ -100,10 +100,10 @@ def get_parser():
         help="The inference model")
     parser.add_argument(
         "can", type=str,
-        help="The inference model")
+        help="The target base in canonical alphabet(ACGT)")
     parser.add_argument(
         "mod", type=str,
-        help="The inference model")
+        help="The corresponding label for modification for the target base (y:m6A, m:5mC, h:5hmC)")
     parser.add_argument(
         '--can_base_idx', default=[0,1,1,2,3], 
         help='Write output in fastq format (default is fasta)')
@@ -112,19 +112,18 @@ def get_parser():
         help="The fasta file to output")
     parser.add_argument(
         "--limit", type=Positive(int),default=None,
-        help="The fasta file to output")
+        help="Then number of output reads")
     parser.add_argument(
         "--length", type=int,default=100,
-        help="The fasta file to output")
+        help="signal length parameter for AD")
     parser.add_argument(
         "--type", type=str,default="dna",
-        help="The fasta file to output")
+        help="specify the output type: dna/rna")
     parser.add_argument(
         '--right_len', type=int,default=0,
-        help='incremental_learning_parameters lambda')
+        help='length for one base')
     parser.add_argument(
-        '--scale', type=float,default=3,
-        help='incremental_learning_parameters lambda')
+        '--scale', type=float,default=3)
     
 
     return parser
