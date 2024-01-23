@@ -99,8 +99,8 @@ def prepare_random_batches(
             standardize=net_info.metadata.standardize,
             select_strands_randomly=select_strands_randomly,
             first_strand_index=first_strand_index)
-        chunk_batch = [chunk for chunk in chunk_batch if chunk.seq_len/chunk.sig_len > 0.01]
-        chunk_batch = [chunk for chunk in chunk_batch if chunk.start_sample > 5000]
+        #chunk_batch = [chunk for chunk in chunk_batch if chunk.seq_len/chunk.sig_len > 0.01]
+        #chunk_batch = [chunk for chunk in chunk_batch if chunk.start_sample > 5000]
         first_strand_index += sum(batch_rejections.values())
         if len(chunk_batch) < sub_batch_size:
             log.write(('* Warning: only {} chunks passed filters ' +
